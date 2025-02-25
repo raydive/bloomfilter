@@ -2,9 +2,6 @@ package com.github.raydive.bloomfilter
 
 import com.google.common.hash.Hashing
 
-import scala.util.boundary
-import scala.util.boundary.break
-
 /**
  * A BloomFilter is a probabilistic data structure that is used to test whether an element is a member of a set.
  * False positive matches are possible, but false negatives are not.
@@ -42,13 +39,11 @@ class BloomFilter(val n: Int,
    * @return true if the filter might contain the key, false if the filter definitely does not contain the key
    */
   def mightContain(key: String): Boolean = {
-    boundary:
-      for (i <- 0 until k) {
-        var h = hash(key, i)
-        if (h < 0) h = ~h // Convert negative hash to non-negative
-        if (!bitSet.get(h % m)) break(false)
-      }
-      true
+    (0 until k).forall { i =>
+      var h = hash(key, i)
+      if (h < 0) h = ~h // Convert negative hash to non-negative
+      bitSet.get(h % m)
+    }
   }
 
   /**
