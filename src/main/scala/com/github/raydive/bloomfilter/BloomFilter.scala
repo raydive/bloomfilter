@@ -16,7 +16,7 @@ import com.google.common.hash.Hashing
 class BloomFilter(val n: Int,
                   val m: Int,
                   val k: Int,
-                  val bitSet: java.util.BitSet) {
+                  val bitSet: java.util.BitSet) extends Serializable {
   assert(n > 0, "n must be greater than 0")
   assert(m > 0, "m must be greater than 0")
   assert(k > 0, "k must be greater than 0")
