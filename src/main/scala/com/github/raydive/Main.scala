@@ -19,10 +19,11 @@ object Main {
       filter.set(key)
       set += key
 
-      println("%d %d %d".format(i, sizeOf(filter), sizeOf(set)))
+      println("%d %d %d".format(i+1, sizeOf(filter), sizeOf(set)))
     }
 
     // check if the filter might contain the key
+    // This result must be true for all keys in the set
     keys.foreach { key =>
       assert(filter.mightContain(key) == set.contains(key))
     }
