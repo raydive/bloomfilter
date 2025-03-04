@@ -33,12 +33,12 @@ object Main {
   private def sizeOf(obj: AnyRef): Long = {
     import java.io._
 
-    Using(new ByteArrayOutputStream()) { baos =>
-      Using(new ObjectOutputStream(baos)) { oos =>
-        oos.writeObject(obj)
-        oos.flush()
-        baos.size()
-      }.get
+    Using.Manager { use =>
+      val baos = use(new ByteArrayOutputStream())
+      val oos = use(new ObjectOutputStream(baos))
+      oos.writeObject(obj)
+      oos.flush()
+      baos.size()
     }.get
   }
 }
