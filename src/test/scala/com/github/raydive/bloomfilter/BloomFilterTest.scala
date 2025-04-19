@@ -1,6 +1,8 @@
 package com.github.raydive.bloomfilter
 
-class BloomFilterTest extends org.scalatest.funsuite.AnyFunSuiteLike {
+import org.scalatest.funsuite.AnyFunSuiteLike
+
+class BloomFilterTest extends AnyFunSuiteLike {
 
   test("ブルームフィルターにhogeをセットした場合、必ずtrueを返す") {
     val bf = BloomFilter(1000, 0.01)
